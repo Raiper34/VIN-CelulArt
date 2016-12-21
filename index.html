@@ -11,8 +11,14 @@
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <!-- Phaser -->
         <script type="text/javascript" src="bower_components/phaser/build/phaser.js"></script>
+        <!-- Mine -->
+        <script type="text/javascript" src="js/boot.js"></script>
+        <script type="text/javascript" src="js/loader.js"></script>
+        <script type="text/javascript" src="js/canvas.js"></script>
+        <script type="text/javascript" src="js/cell.js"></script>
+        <script type="text/javascript" src="js/cellMatrix.js"></script>
     </head>
-    <body style="height: 100%;">
+    <body style="background-color: black;">
             <div style="position: fixed;" id="panel" class="panel panel-primary">
                 <div style="cursor: pointer;" id="panel-head" class="panel-heading">
                     <span class="glyphicon glyphicon-move"></span> Settings
@@ -41,7 +47,7 @@
                     </form>
                 </div>
             </div>
-        <div id="application" style="background-color: black; width: 100%; height: 100%;"></div>
+        <div id="application" style="background-color: red; width: 100%; height: 100%;"></div>
         <script>
             $(document).ready(function () {
                 $("#panel").draggable({
@@ -50,6 +56,10 @@
                 });
             });
             var game = new Phaser.Game(800,480, Phaser.AUTO);
+            game.state.add("boot", boot);
+            game.state.add("loader", loader);
+            game.state.add("canvas", canvas);
+            game.state.start("boot");
         </script>
     </body>
 </html>
