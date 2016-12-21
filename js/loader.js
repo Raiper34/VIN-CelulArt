@@ -16,7 +16,7 @@ loader.prototype =
 	preload: function () 
     {    
         //Loading progress
-        this.game.add.text(this.game.world.width/2, this.game.world.height/2, 'Loading...', { font: '36px Arial', fontWeight: 'bold', fill: "#ffffff", align: "center" });
+        //this.game.add.text(this.game.world.width/2, this.game.world.height/2, 'Loading...', { font: '36px Arial', fontWeight: 'bold', fill: "#ffffff", align: "center" });
     },
     
     /*
@@ -24,6 +24,7 @@ loader.prototype =
      */
     create: function () 
     {
+        unlockUi();
         this.state.start("canvas");
     }
 };

@@ -9,7 +9,7 @@ cell = function cell(game)
     this.stage = 0;
 };
 
-cell.changeStage = function(stage)
+cell.prototype.changeStage = function(stage)
 {
     this.stage = stage;
 }

@@ -24,6 +24,7 @@ boot.prototype =
     create: function()
     {
         this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+        this.game.canvas.id = 'applicationCanvas';
         //this.scale.pageAlignVertically = true;
         //this.scale.pageAlignHorizontally = true;
         this.state.start("loader");

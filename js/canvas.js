@@ -13,18 +13,7 @@ canvas.prototype =
     
     create: function()
     {
-        var graphics = this.game.add.graphics(0, 0);
-
-        graphics.beginFill(0xFF0000, 1);
-        //graphics.drawCircle(300, 300, 100);
-        graphics.beginFill(0x673ab7);
-        graphics.drawRect(200, 200, 300, 300);
-        graphics.endFill();
-        
-    },
-    
-    update: function()
-    {
-        
+        matrix = new cellMatrix(this.game);
+        matrix.initialize(10, 10, 10, 5, 5, 10); 
     }
 }
