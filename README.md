@@ -1,1 +1,3 @@
 # VIN-CelulArt
+
+CelulArt je realizovaný ako webová aplikácia dostupná z http://www.raiper34.net/vin , bola tvorená výhradne programovacím jazykom Javascript, značkovacím jazykom HTML a pomocou CSS. Boli použité knižnice: Bootstrap(okno nastavení), jQuery(manipulácia s oknom a hodnotami v ňom) a Phaser (logika aplikácie a jej vykreslenie na canvas plátno). Farebná paleta je použitá z dizajnérskeho jazyka Material Design. 
