@@ -41,6 +41,7 @@ cellMatrix.prototype.initialize = function(widthCount, heightCount, surroundingT
     this.generateCells();
     this.generateSeeds();
     this.doEvolution();
+    //this.write();
     this.draw();
 };
 
@@ -69,7 +70,7 @@ cellMatrix.prototype.generateSeeds = function()
     {
         var randomStage = parseInt(Math.random() * 100) % this.stagesCount;
         var randomI = parseInt(Math.random() * 100) % this.widthCount;
-        var randomJ = parseInt(Math.random() * 100) % this.widthCount;
+        var randomJ = parseInt(Math.random() * 100) % this.heightCount;
         this.content[randomI][randomJ].stage = randomStage;
         this.tempContent[randomI][randomJ].stage = randomStage;
     }
@@ -86,11 +87,24 @@ cellMatrix.prototype.draw = function()
             var calculatedWidth = this.game.world.width/this.widthCount;
             //var randomColor = parseInt(Math.random() * 100) % this.colors.length;
             this.renderer.beginFill(this.colors[(randomColor + this.content[i][j].stage) % this.colors.length], 1);
-            this.renderer.drawRect(i * calculatedWidth, j * calculatedHeight, calculatedWidth, calculatedHeight);
+            this.renderer.drawRect(i * calculatedWidth - 1, j * calculatedHeight - 1, calculatedWidth + 1, calculatedHeight + 1);
             this.renderer.endFill();
         }
     }
 };
+
+cellMatrix.prototype.write = function()
+{
+    for(i = 0; i < this.widthCount; i++)
+    {
+        var line = "";
+        for(j = 0; j < this.heightCount; j++)
+        {
+            line = line + " | " + this.content[i][j].stage; 
+        }
+        console.log(line);
+    }
+}
 
 cellMatrix.prototype.doEvolution = function()
 {
@@ -102,9 +116,9 @@ cellMatrix.prototype.doEvolution = function()
 
 cellMatrix.prototype.evolve = function()
 {
-    for(i = 0; i < this.widthCount; i++)
+    for(var i = 0; i < this.widthCount; i++)
     {
-        for(j = 0; j < this.heightCount; j++)
+        for(var j = 0; j < this.heightCount; j++)
         {
             this.tempContent[i][j].stage = this.getEvolvedStage(i, j);
         }
@@ -119,47 +133,48 @@ cellMatrix.prototype.evolve = function()
     }
 ;};
 
-cellMatrix.prototype.getEvolvedStage = function(i, j)
+cellMatrix.prototype.getEvolvedStage = function(x, y)
 {
-    if(this.content[i][j].stage == 0)
+    if(this.content[x][y].stage == 0)
     {
         //Left
-        var neighbour = this.getNeighbourStage(i + 1, j);
-        if(neighbour !== 0)
+        var neighbour = this.getNeighbourStage(x + 1, y);
+        if(neighbour != 0)
         {
             return 1;
         }
         //Right
-        neighbour = this.getNeighbourStage(i - 1, j);
-        if(neighbour !== 0)
+        neighbour = this.getNeighbourStage(x - 1, y);
+        if(neighbour != 0)
         {
             return 1;
         }
         //Top
-        neighbour = this.getNeighbourStage(i, j - 1);
-        if(neighbour !== 0)
+        neighbour = this.getNeighbourStage(x, y - 1);
+        if(neighbour != 0)
         {
             return 1;
         }
         //Down
-        neighbour = this.getNeighbourStage(i, j + 1);
-        if(neighbour !== 0)
+        neighbour = this.getNeighbourStage(x, y + 1);
+        if(neighbour != 0)
         {
             return 1;
         }
+        return 0;
     }
-    return (this.content[i][j].stage + 1) % this.stagesCount;
+    return (this.content[x][y].stage + 1) % this.stagesCount;
 };
 
-cellMatrix.prototype.getNeighbourStage = function(i, j)
+cellMatrix.prototype.getNeighbourStage = function(x, y)
 {
-    if(i >= this.widthCount || j >= this.heightCount || i < 0 || j < 0) //out of boundaries
+    if(x >= this.widthCount || y >= this.heightCount || x < 0 || y < 0) //out of boundaries
     {
         return 0;
     }
     else
     {
-        return this.content[i][j].stage;
+        return this.content[x][y].stage;
     }
 }
 

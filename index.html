@@ -2,13 +2,15 @@
 <html style="height: 100%;">
     <head>
         <meta charset="UTF-8">
-        <title>title</title>
+        <title>VIN - CelulArt</title>
         <!-- Jquery -->
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
         <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css">
+        <script type="text/javascript" src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js"></script>
         <!-- Phaser -->
         <script type="text/javascript" src="bower_components/phaser/build/phaser.js"></script>
         <!-- Mine -->
@@ -20,39 +22,56 @@
         <script type="text/javascript" src="js/ui.js"></script>
     </head>
     <body style="background-color: black;">
-            <div style="position: fixed;" id="panel" class="panel panel-primary">
-                <div style="cursor: pointer;" id="panel-head" class="panel-heading">
-                    <span class="glyphicon glyphicon-move"></span> Celular automata art
-                </div>
-                <div class="panel-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of rows</label>
-                            <input type="text" class="form-control" id="numberOfRows" value="16">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of cols</label>
-                            <input type="text" class="form-control" id="numberOfCols" value="16">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of stages</label>
-                            <input type="text" class="form-control" id="numberOfStages" value="3">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of steps</label>
-                            <input type="text" class="form-control" id="numberOfSteps" value="32">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Number of seeds</label>
-                            <input type="text" class="form-control" id="numberOfSeeds" value="4">
-                        </div>
-                        <button type="button" class="btn btn-default" id="generateButton" disabled>Generate</button>
-                        <a download="art_work.png" class="btn btn-default" id="saveButton">Save</a>
-                        <span id="loadingText" class="text-danger text-uppercase"><br><br><b>Loading...</b></span>
-                    </form>
-                </div>
+        <div style="position: fixed;" id="panel" class="panel panel-primary">
+            <div style="cursor: pointer;" id="panel-head" class="panel-heading">
+                <span class="glyphicon glyphicon-move"></span> CELULar automata ART generator
             </div>
-                                                                                                                    <div id="application" style="background-color: red; width: 100%; height: 100%;"></div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number of rows</label><br>
+                        <input id="numberOfRows" type="text" data-provide="slider" data-slider-min="1" data-slider-max="128" data-slider-step="1" data-slider-value="16">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number of cols</label><br>
+                        <input id="numberOfCols" type="text" data-provide="slider" data-slider-min="1" data-slider-max="128" data-slider-step="1" data-slider-value="16">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number of stages</label><br>
+                        <input id="numberOfStages" type="text" data-provide="slider" data-slider-min="1" data-slider-max="18" data-slider-step="1" data-slider-value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number of steps</label><br>
+                        <input id="numberOfSteps" type="text" data-provide="slider" data-slider-min="1" data-slider-max="256" data-slider-step="1" data-slider-value="4">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Number of seeds</label><br>
+                        <input id="numberOfSeeds" type="text" data-provide="slider" data-slider-min="1" data-slider-max="64" data-slider-step="1" data-slider-value="4">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Neighbourhood type</label><br>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                von Neumann
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                Moore
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-default" id="generateButton" disabled>Generate</button>
+                <a download="art_work.png" class="btn btn-default" id="saveButton">Save</a>
+                <span id="loadingText" class="text-danger text-uppercase"><b>Loading...</b></span>
+            </div>
+        </div>
+        <div id="application" style="background-color: red; width: 100%; height: 100%;"></div>
         <script>
             $(document).ready(function () {
                 $("#panel").draggable({
