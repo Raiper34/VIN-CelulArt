@@ -1,7 +1,7 @@
 /*
  * Loader screen
  * Load of all assets into programm
- * @Author: Filip Raiper34 Gulan
+ * @Author: Filip Gulan
  */
 loader = function (game) 
 {

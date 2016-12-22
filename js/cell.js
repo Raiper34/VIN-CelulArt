@@ -1,6 +1,6 @@
 /*
- * 
- * @Author: Filip Raiper34 Gulan
+ * Represent one cell in cellmatrix
+ * @Author: Filip Gulan
  */
 cell = function cell(game)
 {
@@ -8,11 +8,6 @@ cell = function cell(game)
     this.game = game;
     this.stage = 0;
 };
-
-cell.prototype.changeStage = function(stage)
-{
-    this.stage = stage;
-}
 
 cell.prototype = Object.create(Object.prototype);
 cell.prototype.constructor = cell;

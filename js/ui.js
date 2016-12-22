@@ -1,12 +1,23 @@
-$(document).ready(function()
+/**
+ * File to manipulate with ui 
+ * @Author Filip Gulan
+ */
+
+$(document).ready(function ()
 {
+    $("#panel").draggable({
+        handle: "#panel-head",
+        scroll: false
+    });
+
     $('#generateButton').click(function () {
         var numberOfRows = $('#numberOfRows').val();
         var numberOfCols = $('#numberOfCols').val();
         var numberOfStages = $('#numberOfStages').val();
         var numberOfSteps = $('#numberOfSteps').val();
         var numberOfSeeds = $('#numberOfSeeds').val();
-        matrix.initialize(numberOfCols,numberOfRows, 1, numberOfStages, numberOfSteps, numberOfSeeds);
+        var neighbourhoodType = $('#neighbourhoodType input:radio:checked').val()
+        matrix.initialize(numberOfCols, numberOfRows, neighbourhoodType, numberOfStages, numberOfSteps, numberOfSeeds);
     });
 
     $('#saveButton').click(function () {
@@ -15,6 +26,9 @@ $(document).ready(function()
     });
 });
 
+/**
+ * Unlock ui, user can generate etc...
+ */
 function unlockUi()
 {
     $('#generateButton').prop('disabled', false);

@@ -22,6 +22,7 @@
         <script type="text/javascript" src="js/ui.js"></script>
     </head>
     <body style="background-color: black;">
+        <!-- START Panel -->
         <div style="position: fixed;" id="panel" class="panel panel-primary">
             <div style="cursor: pointer;" id="panel-head" class="panel-heading">
                 <span class="glyphicon glyphicon-move"></span> CELULar automata ART generator
@@ -30,11 +31,11 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Number of rows</label><br>
-                        <input id="numberOfRows" type="text" data-provide="slider" data-slider-min="1" data-slider-max="128" data-slider-step="1" data-slider-value="16">
+                        <input id="numberOfRows" type="text" data-provide="slider" data-slider-min="2" data-slider-max="128" data-slider-step="1" data-slider-value="16">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Number of cols</label><br>
-                        <input id="numberOfCols" type="text" data-provide="slider" data-slider-min="1" data-slider-max="128" data-slider-step="1" data-slider-value="16">
+                        <input id="numberOfCols" type="text" data-provide="slider" data-slider-min="2" data-slider-max="128" data-slider-step="1" data-slider-value="16">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Number of stages</label><br>
@@ -48,18 +49,24 @@
                         <label for="exampleInputEmail1">Number of seeds</label><br>
                         <input id="numberOfSeeds" type="text" data-provide="slider" data-slider-min="1" data-slider-max="64" data-slider-step="1" data-slider-value="4">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="neighbourhoodType">
                         <label for="exampleInputEmail1">Neighbourhood type</label><br>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked>
                                 von Neumann
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="1">
                                 Moore
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="2">
+                                Experimental
                             </label>
                         </div>
                     </div>
@@ -71,14 +78,13 @@
                 <span id="loadingText" class="text-danger text-uppercase"><b>Loading...</b></span>
             </div>
         </div>
+        <!-- END Panel -->
+        
+        <!-- Div to generate App -->
         <div id="application" style="background-color: red; width: 100%; height: 100%;"></div>
+        
+        <!-- Start Phaser Application -->
         <script>
-            $(document).ready(function () {
-                $("#panel").draggable({
-                    handle: "#panel-head",
-                    scroll: false
-                });
-            });
             var game = new Phaser.Game(2000, 1600, Phaser.CANVAS);
             game.state.add("boot", boot);
             game.state.add("loader", loader);

@@ -1,7 +1,7 @@
 /*
  * Boot
  * Prepare loading screen
- * @Author: Filip Raiper34 Gulan
+ * @Author: Filip Gulan
  */
 boot = function(game)
 {
